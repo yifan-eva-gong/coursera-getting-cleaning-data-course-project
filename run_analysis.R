@@ -1,3 +1,5 @@
+library(dplyr)
+
 # 1. Merges the training and the test sets to create one data set.
 x_train <- read.table("./Data/train/X_train.txt")
 y_train <- read.table("./Data/train/y_train.txt")
@@ -26,12 +28,12 @@ y_train_named <- y_train
 y_train_named[, 1] <- activities[y_train_named[, 1], 2]
 y_test_named <- y_test
 y_test_named[, 1] <- activities[y_test_named[, 1], 2]
-names(y_train_named) <- "activity"
-names(y_test_named) <- "activity"
+names(y_train_named) <- "Activity"
+names(y_test_named) <- "Activity"
 
 # 4. Appropriately labels the data set with descriptive variable names.
-names(subject_train) <- "subject"
-names(subject_test) <- "subject"
+names(subject_train) <- "Subject"
+names(subject_test) <- "Subject"
 
 # 5. From the data set in step 4, creates a second, independent
 # tidy data set with the average of each variable for each activity and each subject.
@@ -39,3 +41,6 @@ names(subject_test) <- "subject"
 tidy_train <- cbind(x_train_sub,y_train_named,subject_train)
 tidy_test <- cbind(x_test_sub,y_test_named,subject_test)
 tidy_all <- rbind(tidy_train,tidy_test)
+
+grouped <- tidy_all %>% group_by(Subject, Activity) %>% summarise_each(funs(mean))
+write.table(grouped, "tidy_data.txt", row.name=FALSE)
