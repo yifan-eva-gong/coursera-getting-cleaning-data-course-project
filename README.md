@@ -1,4 +1,4 @@
-# coursera-getting-cleaning-data-course-project
+# Coursera Getting and Cleaning Data Course Project
 
 ## About
 This repository contains my work for Coursera's Getting and Cleaning Data Course Project, including R scripts to clean the raw data, a codebook explaining the procedure, and the final output - a tidy dataset.
